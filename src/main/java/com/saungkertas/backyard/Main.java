@@ -5,12 +5,13 @@ import java.util.HashMap;
 public class Main {
 
     public static void main(String[] args) {
-        int matrix = 20;
+        int matrixX = 20;
+        int matrixY = 20
 
         HashMap<Object, Integer> grid = new HashMap<>();
         HashMap<Object, Integer> nextGrid = new HashMap<>();
-        for (int x = -1; x <= matrix; x++) {
-            for (int y = -1; y <= matrix; y++) {
+        for (int x = -1; x <= matrixX; x++) {
+            for (int y = -1; y <= matrixY; y++) {
                 grid.put(new Point(x, y), 0);
                 nextGrid.put(new Point(x, y), 0);
             }
@@ -20,8 +21,8 @@ public class Main {
         grid.put(new Point(3, 3), 1);
         grid.put(new Point(3, 4), 1);
 
-        for (int x = 0; x < matrix; x++) {
-            for (int y = 0; y < matrix; y++) {
+        for (int x = 0; x < matrixX; x++) {
+            for (int y = 0; y < matrixY; y++) {
                 if (getPointValue(grid, x, y) == 0) {
                     System.out.print("   ");
                 } else {
@@ -32,8 +33,8 @@ public class Main {
         }
 
         while (true) {
-            for (int x = 0; x < matrix; x++) {
-                for (int y = 0; y < matrix; y++) {
+            for (int x = 0; x < matrixX; x++) {
+                for (int y = 0; y < matrixY; y++) {
                     int aliveNeighbours = getPointValue(grid, x - 1, y - 1) +
                             getPointValue(grid, x - 1, y) +
                             getPointValue(grid, x - 1, y + 1) +
@@ -49,14 +50,14 @@ public class Main {
                 }
             }
 
-            for (int x = 0; x < matrix; x++) {
-                for (int y = 0; y < matrix; y++) {
+            for (int x = 0; x < matrixX; x++) {
+                for (int y = 0; y < matrixY; y++) {
                     grid.put(new Point(x, y), nextGrid.get(new Point(x, y)));
                 }
             }
 
-            for (int x = 0; x < matrix; x++) {
-                for (int y = 0; y < matrix; y++) {
+            for (int x = 0; x < matrixX; x++) {
+                for (int y = 0; y < matrixY; y++) {
                     if (getPointValue(grid, x, y) == 0) {
                         System.out.print("   ");
                     } else {
