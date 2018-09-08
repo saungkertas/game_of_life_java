@@ -1,5 +1,7 @@
 package com.saungkertas.backyard;
 
+import java.util.Objects;
+
 public class Point {
 
     private int x;
@@ -10,11 +12,18 @@ public class Point {
         this.y = y;
     }
 
-    public int getX() {
-        return x;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Point)) return false;
+        Point point = (Point) o;
+        return x == point.x &&
+                y == point.y;
     }
 
-    public int getY() {
-        return y;
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(x, y);
     }
 }
