@@ -25,9 +25,17 @@ public class Main {
             }
         }
 
-        grid.put(new Point(3, 2), 1);
+        //glider
+        grid.put(new Point(2, 2), 1);
+        grid.put(new Point(4, 2), 1);
         grid.put(new Point(3, 3), 1);
+        grid.put(new Point(4, 3), 1);
         grid.put(new Point(3, 4), 1);
+
+        //blinker
+//        grid.put(new Point(3, 2), 1);
+//        grid.put(new Point(3, 3), 1);
+//        grid.put(new Point(3, 4), 1);
 
         for (int x = 0; x < matrixX; x++) {
             for (int y = 0; y < matrixY; y++) {
@@ -83,18 +91,28 @@ public class Main {
 
             if (expandMaxX) {
                 maxX += 1;
+                for (int y = minY - 1; y <= maxY + 1; y++) {
+                    grid.put(new Point(maxX, y), 0);
+                }
             }
             if (expandMinX) {
-                maxX -= 1;
+                minX -= 1;
+                for (int y = minY - 1; y < maxY; y++) {
+                    grid.put(new Point(minX, y), 0);
+                }
             }
             if (expandMaxY) {
                 maxY += 1;
+                for (int x = minX - 1; x < maxX; x++) {
+                    grid.put(new Point(x, maxY), 0);
+                }
             }
             if (expandMinY) {
                 minY -= 1;
+                for (int x = minX - 1; x < maxX; x++) {
+                    grid.put(new Point(x, minY), 0);
+                }
             }
-
-            System.out.println(minX + " ," + maxX + " ," + minY + " ," + maxY);
 
             for (int x = 0; x < matrixX; x++) {
                 for (int y = 0; y < matrixY; y++) {
@@ -107,7 +125,7 @@ public class Main {
                 System.out.println();
             }
             try {
-                Thread.sleep(200);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
