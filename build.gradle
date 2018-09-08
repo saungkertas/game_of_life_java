@@ -2,7 +2,10 @@ plugins {
     id 'java'
     id 'jacoco'
     id 'pmd'
+    id 'application'
 }
+
+mainClassName = 'com.saungkertas.backyard.Main'
 
 dependencies {
     testCompile 'junit:junit:4.12'
@@ -14,10 +17,10 @@ repositories {
 }
 
 test {
-  testLogging {
-    exceptionFormat "full"
-    events "passed", "failed"
-  } 
+    testLogging {
+        exceptionFormat "full"
+        events "passed", "failed"
+    }
 }
 
 jacoco {
@@ -30,4 +33,8 @@ jacocoTestReport {
         xml.enabled = false
         csv.enabled = false
     }
+}
+
+run {
+    standardInput = System.in
 }
