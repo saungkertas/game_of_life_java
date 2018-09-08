@@ -49,7 +49,11 @@ public class Main {
                 }
             }
 
-            grid = nextGrid;
+            for (int x = 0; x < matrix; x++) {
+                for (int y = 0; y < matrix; y++) {
+                    grid.put(new Point(x, y), nextGrid.get(new Point(x, y)));
+                }
+            }
 
             for (int x = 0; x < matrix; x++) {
                 for (int y = 0; y < matrix; y++) {
