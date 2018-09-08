@@ -11,6 +11,10 @@ public class Main {
         int maxY = 20;
         int minX = 0;
         int minY = 0;
+        boolean expandMinX;
+        boolean expandMinY;
+        boolean expandMaxX;
+        boolean expandMaxY;
 
         HashMap<Object, Integer> grid = new HashMap<>();
         HashMap<Object, Integer> nextGrid = new HashMap<>();
@@ -37,6 +41,11 @@ public class Main {
         }
 
         while (true) {
+            expandMinX = false;
+            expandMinY = false;
+            expandMaxX = false;
+            expandMaxY = false;
+
             for (int x = minX; x < maxX; x++) {
                 for (int y = minY; y < maxY; y++) {
                     int aliveNeighbours = getPointValue(grid, x - 1, y - 1) +
@@ -57,8 +66,35 @@ public class Main {
             for (int x = minX; x < maxX; x++) {
                 for (int y = minY; y < maxY; y++) {
                     grid.put(new Point(x, y), nextGrid.get(new Point(x, y)));
+                    if (grid.get(new Point(x, maxY - 1)) == 1) {
+                        expandMaxY = true;
+                    }
+                    if (grid.get(new Point(x, minY)) == 1) {
+                        expandMinY = true;
+                    }
+                    if (grid.get(new Point(maxX - 1, y)) == 1) {
+                        expandMaxX = true;
+                    }
+                    if (grid.get(new Point(minX, y)) == 1) {
+                        expandMinX = true;
+                    }
                 }
             }
+
+            if (expandMaxX) {
+                maxX += 1;
+            }
+            if (expandMinX) {
+                maxX -= 1;
+            }
+            if (expandMaxY) {
+                maxY += 1;
+            }
+            if (expandMinY) {
+                minY -= 1;
+            }
+
+            System.out.println(minX + " ," + maxX + " ," + minY + " ," + maxY);
 
             for (int x = 0; x < matrixX; x++) {
                 for (int y = 0; y < matrixY; y++) {
