@@ -6,7 +6,11 @@ public class Main {
 
     public static void main(String[] args) {
         int matrixX = 20;
-        int matrixY = 20
+        int matrixY = 20;
+        int maxX = 20;
+        int maxY = 20;
+        int minX = 0;
+        int minY = 0;
 
         HashMap<Object, Integer> grid = new HashMap<>();
         HashMap<Object, Integer> nextGrid = new HashMap<>();
@@ -33,8 +37,8 @@ public class Main {
         }
 
         while (true) {
-            for (int x = 0; x < matrixX; x++) {
-                for (int y = 0; y < matrixY; y++) {
+            for (int x = minX; x < maxX; x++) {
+                for (int y = minY; y < maxY; y++) {
                     int aliveNeighbours = getPointValue(grid, x - 1, y - 1) +
                             getPointValue(grid, x - 1, y) +
                             getPointValue(grid, x - 1, y + 1) +
@@ -50,8 +54,8 @@ public class Main {
                 }
             }
 
-            for (int x = 0; x < matrixX; x++) {
-                for (int y = 0; y < matrixY; y++) {
+            for (int x = minX; x < maxX; x++) {
+                for (int y = minY; y < maxY; y++) {
                     grid.put(new Point(x, y), nextGrid.get(new Point(x, y)));
                 }
             }
@@ -67,7 +71,7 @@ public class Main {
                 System.out.println();
             }
             try {
-                Thread.sleep(300);
+                Thread.sleep(200);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
